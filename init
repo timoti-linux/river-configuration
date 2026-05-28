@@ -1,0 +1,75 @@
+#!/bin/sh
+
+#############
+# autostart #
+#############
+pkill waybar
+waybar &
+mako &
+
+############
+# keybinds #
+############
+
+# apps
+riverctl map -layout 0 normal Super R spawn Telegram #telegram
+riverctl map -layout 0 normal Super Q spawn firefox #browser
+riverctl map -layout 0 normal Super Return spawn foot #terminal
+riverctl map -layout 0 normal Super D spawn fuzzel #app launcher
+riverctl map -layout 0 normal Super C spawn geany #code writer
+riverctl map -layout 0 normal Super E spawn thunar #filemanager
+# river and power
+riverctl map -layout 0 normal Super W close #close window
+riverctl map -layout 0 normal Super+Alt Q exit #exit
+riverctl map -layout 0 normal Super+Alt R spawn "$HOME/.config/river/init" #restart river
+riverctl map -layout 0 normal Super+Shift Q spawn poweroff #power off
+riverctl map -layout 0 normal Super+Shift R spawn reboot #restar pc
+# modes
+riverctl map -layout 0 normal Super S toggle-float #float mode
+riverctl map -layout 0 normal Super F toggle-fullscreen #fullscreen
+# screenshots
+riverctl map -layout 0 normal Control Print spawn 'sh -c "grim -g \"$(slurp)\" \"$HOME/Pictures/Screenshots/$(date +%Y-%m-%d_%H-%M-%S).png\""'
+riverctl map -layout 0 normal None Print spawn "grim -g \"\$(slurp)\" - | wl-copy" #screenshot copy part of screen
+riverctl map -layout 0 normal Shift Print spawn "grim - | wl-copy" #screenshot copy full screen
+riverctl map -layout 0 normal Super Print spawn "grim $HOME/Pictures/Screenshots/$(date +%Y-%m-%d_%H-%M-%S).png" #screenshot save full screen
+# keyboard layout
+riverctl keyboard-layout -options "grp:win_space_toggle" us,ru
+
+#########
+# rules #
+#########
+riverctl spawn rivertile
+riverctl output-layout rivertile
+riverctl default-layout rivertile
+
+##############
+# wallpapers #
+##############
+swww-daemon &
+swww img ~/Pictures/Wallpapers/wallhaven-2133ly_1920x1080.png
+
+##############
+# workspaces #
+##############
+for i in $(seq 1 9); do
+    tags=$((1 << ($i - 1)))
+    riverctl map normal Super $i set-focused-tags $tags
+    riverctl map normal Super+Shift $i set-view-tags $tags
+done
+
+################ 
+# window rules #
+################
+riverctl map-pointer normal Super BTN_LEFT move-view
+riverctl map-pointer normal Super BTN_RIGHT resize-view
+riverctl border-width 2
+riverctl border-color-focused 0x9ccfd8
+riverctl border-color-unfocused 0x26233a
+riverctl border-radius 4
+riverctl map-pointer normal Super BTN_RIGHT resize-tile
+riverctl map -layout 0 normal Super H send-layout-cmd rivertile "main-ratio -0.05"
+riverctl map -layout 0 normal Super L send-layout-cmd rivertile "main-ratio +0.05"
+riverctl map -layout 0 normal Super H focus-view left
+riverctl map -layout 0 normal Super j focus-view down
+riverctl map -layout 0 normal Super k focus-view up
+riverctl map -layout 0 normal Super l focus-view right
