@@ -28,7 +28,7 @@ riverctl map -layout 0 normal Super+Shift R spawn reboot #restar pc
 riverctl map -layout 0 normal Super S toggle-float #float mode
 riverctl map -layout 0 normal Super F toggle-fullscreen #fullscreen
 # screenshots
-riverctl map -layout 0 normal Control Print spawn 'sh -c "grim -g \"$(slurp)\" \"$HOME/Pictures/Screenshots/$(date +%Y-%m-%d_%H-%M-%S).png\""'
+riverctl map -layout 0 normal Control Print spawn 'sh -c "grim -g \"$(slurp)\" \"$HOME/Pictures/Screenshots/$(date +%Y-%m-%d_%H-%M-%S).png\""' #screenshot save part of screen
 riverctl map -layout 0 normal None Print spawn "grim -g \"\$(slurp)\" - | wl-copy" #screenshot copy part of screen
 riverctl map -layout 0 normal Shift Print spawn "grim - | wl-copy" #screenshot copy full screen
 riverctl map -layout 0 normal Super Print spawn "grim $HOME/Pictures/Screenshots/$(date +%Y-%m-%d_%H-%M-%S).png" #screenshot save full screen
@@ -45,8 +45,8 @@ riverctl default-layout rivertile
 ##############
 # wallpapers #
 ##############
-swww-daemon &
-swww img ~/Pictures/Wallpapers/wallhaven-2133ly_1920x1080.png
+awww-daemon &
+awww img ~/Pictures/Wallpapers/wallhaven-2133ly_1920x1080.png
 
 ##############
 # workspaces #
