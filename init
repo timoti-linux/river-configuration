@@ -34,6 +34,11 @@ riverctl map -layout 0 normal Shift Print spawn "grim - | wl-copy" #screenshot c
 riverctl map -layout 0 normal Super Print spawn "grim $HOME/Pictures/Screenshots/$(date +%Y-%m-%d_%H-%M-%S).png" #screenshot save full screen
 # keyboard layout
 riverctl keyboard-layout -options "grp:win_space_toggle" us,ru
+#volume
+riverctl map -layout 0 normal None XF86AudioRaiseVolume spawn 'wpctl set-volume -l 1.5 @DEFAULT_AUDIO_SINK@ 5%+' # +5% volume
+riverctl map -layout 0 normal None XF86AudioLowerVolume spawn 'wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%-' # -5% volume
+riverctl map -lyaout 0 normal None XF86AudioMute spawn 'wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle'
+riverctl map -layout 0 normal Super M spawn 'wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle'
 
 #########
 # rules #
@@ -46,7 +51,7 @@ riverctl default-layout rivertile
 # wallpapers #
 ##############
 awww-daemon &
-awww img ~/Pictures/Wallpapers/wallhaven-2133ly_1920x1080.png
+awww img ~/Pictures/Wallpapers/wallhaven-2133ly_1920x1080.png  --transition-fps 60 --transition-type wipe
 
 ##############
 # workspaces #
