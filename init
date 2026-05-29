@@ -71,9 +71,8 @@ riverctl border-width 2
 riverctl border-color-focused 0x9ccfd8
 riverctl border-color-unfocused 0x26233a
 riverctl border-radius 4
-riverctl map-pointer normal Super BTN_RIGHT resize-tile
-riverctl map -layout 0 normal Super H send-layout-cmd rivertile "main-ratio -0.05"
-riverctl map -layout 0 normal Super L send-layout-cmd rivertile "main-ratio +0.05"
+riverctl map -layout 0 normal Super+Shift H send-layout-cmd rivertile "main-ratio -0.05"
+riverctl map -layout 0 normal Super+Shift L send-layout-cmd rivertile "main-ratio +0.05"
 riverctl map -layout 0 normal Super H focus-view left
 riverctl map -layout 0 normal Super j focus-view down
 riverctl map -layout 0 normal Super k focus-view up
