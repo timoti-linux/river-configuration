@@ -5,7 +5,7 @@
 #############
 pkill waybar
 waybar &
-mako &
+dunst &
 
 ############
 # keybinds #
@@ -17,13 +17,13 @@ riverctl map -layout 0 normal Super Q spawn firefox #browser
 riverctl map -layout 0 normal Super Return spawn foot #terminal
 riverctl map -layout 0 normal Super D spawn fuzzel #app launcher
 riverctl map -layout 0 normal Super C spawn geany #code writer
-riverctl map -layout 0 normal Super E spawn thunar #filemanager
+riverctl map -layout 0 normal Super E spawn nemo #filemanager
 # river and power
 riverctl map -layout 0 normal Super W close #close window
 riverctl map -layout 0 normal Super+Alt Q exit #exit
 riverctl map -layout 0 normal Super+Alt R spawn "$HOME/.config/river/init" #restart river
-riverctl map -layout 0 normal Super+Shift Q spawn poweroff #power off
-riverctl map -layout 0 normal Super+Shift R spawn reboot #restar pc
+riverctl map -layout 0 normal Super+Alt Z spawn poweroff #power off
+riverctl map -layout 0 normal Super+Alt X spawn reboot #restar pc
 # modes
 riverctl map -layout 0 normal Super S toggle-float #float mode
 riverctl map -layout 0 normal Super F toggle-fullscreen #fullscreen
@@ -37,7 +37,7 @@ riverctl keyboard-layout -options "grp:win_space_toggle" us,ru
 # volume
 riverctl map -layout 0 normal None XF86AudioRaiseVolume spawn 'wpctl set-volume -l 1.5 @DEFAULT_AUDIO_SINK@ 5%+' # +5% volume
 riverctl map -layout 0 normal None XF86AudioLowerVolume spawn 'wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%-' # -5% volume
-riverctl map -lyaout 0 normal None XF86AudioMute spawn 'wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle' #mute
+riverctl map -layout 0 normal None XF86AudioMute spawn 'wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle' #mute
 riverctl map -layout 0 normal Super M spawn 'wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle' #mute micro
 # navigation
 riverctl map -layout 0 normal Super+Shift H send-layout-cmd rivertile "main-ratio -0.1"
@@ -55,12 +55,13 @@ riverctl map-pointer normal Super BTN_RIGHT resize-view
 riverctl spawn rivertile
 riverctl output-layout rivertile
 riverctl default-layout rivertile
+riverctl focus-follows-cursor always
 
 ##############
 # wallpapers #
 ##############
 awww-daemon &
-awww img ~/Pictures/Wallpapers/wallhaven-2133ly_1920x1080.png
+awww img /home/timoti/Downloads/wallhaven-3lg6w9_1920x1080.png
 
 ##############
 # workspaces #
@@ -75,7 +76,6 @@ done
 # window rules #
 ################
 riverctl border-width 2
-riverctl border-color-focused 0x9ccfd8
-riverctl border-color-unfocused 0x26233a
-riverctl border-radius 4
-
+riverctl border-color-focused 0x3b82f6
+riverctl border-color-unfocused 0x374151
+riverctl border-color-urgent 0xff6b6b
