@@ -1,0 +1,11 @@
+{
+    "layer": "top",
+    "position": "top",
+    "modules-left": ["river/tags"],
+    "modules-center": ["clock"],
+    "modules-right": ["pulseaudio", "network", "battery"],
+
+    "river/tags": {
+        "num-tags": 9
+    }
+}
