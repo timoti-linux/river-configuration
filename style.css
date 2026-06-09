@@ -1,0 +1,45 @@
+* {
+    font-family: "JetBrains Mono Nerd Font";
+    font-size: 13px;
+}
+
+window#waybar {
+    background: rgba(20, 20, 20, 0.85);
+    border-bottom: 2px solid #3b82f6;
+    padding: 0;
+}
+
+#tags button {
+    padding: 0 8px;
+    color: #6b7280;
+    background: transparent;
+    border: none;
+    border-radius: 0;
+    margin: 3px 2px;
+}
+
+#tags button.focused {
+    color: #ffffff;
+    background: #3b82f6;
+    border-radius: 4px;
+    margin: 3px 2px;
+    padding: 0 8px;
+    min-height: 0;
+}
+
+#tags button.occupied {
+    color: #93c5fd;
+}
+
+#tags button.urgent {
+    color: #ff6b6b;
+}
+
+#battery,
+#pulseaudio,
+#network {
+    padding: 0 12px;
+    margin: 3px 2px;
+    color: #e2e8f0;
+    border-left: 1px solid #374151;
+}
