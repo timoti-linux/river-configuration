@@ -5,7 +5,7 @@
 
 window#waybar {
     background: rgba(20, 20, 20, 0.85);
-    border-bottom: 2px solid #3b82f6;
+    border-bottom: 2px solid #1d4ed8;
     padding: 0;
 }
 
@@ -20,7 +20,7 @@ window#waybar {
 
 #tags button.focused {
     color: #ffffff;
-    background: #3b82f6;
+    background: #1d4ed8;
     border-radius: 4px;
     margin: 3px 2px;
     padding: 0 8px;
