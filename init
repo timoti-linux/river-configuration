@@ -1,23 +1,18 @@
 #!/bin/sh
 
-#############
-# autostart #
-#############
+### autostart 
 pkill waybar
 waybar &
 dunst &
 
-############
-# keybinds #
-############
-
+### keybinds 
 # apps
 riverctl map -layout 0 normal Super R spawn Telegram #telegram
 riverctl map -layout 0 normal Super Q spawn firefox #browser
 riverctl map -layout 0 normal Super Return spawn foot #terminal
 riverctl map -layout 0 normal Super D spawn fuzzel #app launcher
 riverctl map -layout 0 normal Super C spawn geany #code writer
-riverctl map -layout 0 normal Super E spawn nemo #filemanager
+riverctl map -layout 0 normal Super E spawn thunar #filemanager
 # river and power
 riverctl map -layout 0 normal Super W close #close window
 riverctl map -layout 0 normal Super+Alt Q exit #exit
@@ -28,20 +23,25 @@ riverctl map -layout 0 normal Super+Alt X spawn reboot #restar pc
 riverctl map -layout 0 normal Super S toggle-float #float mode
 riverctl map -layout 0 normal Super F toggle-fullscreen #fullscreen
 # screenshots
-riverctl map -layout 0 normal Control Print spawn 'sh -c "grim -g \"$(slurp)\" \"$HOME/Pictures/Screenshots/$(date +%Y-%m-%d_%H-%M-%S).png\""' #screenshot save part of screen
-riverctl map -layout 0 normal None Print spawn "grim -g \"\$(slurp)\" - | wl-copy" #screenshot copy part of screen
-riverctl map -layout 0 normal Shift Print spawn "grim - | wl-copy" #screenshot copy full screen
-riverctl map -layout 0 normal Super Print spawn "grim $HOME/Pictures/Screenshots/$(date +%Y-%m-%d_%H-%M-%S).png" #screenshot save full screen
+#~ riverctl map -layout 0 normal Control Print spawn 'sh -c "grim -g \"$(slurp)\" \"$HOME/Pictures/Screenshots/$(date +%Y-%m-%d_%H-%M-%S).png\""' #screenshot save part of screen
+#~ riverctl map -layout 0 normal None Print spawn "grim -g \"\$(slurp)\" - | wl-copy" #screenshot copy part of screen
+#~ riverctl map -layout 0 normal Shift Print spawn "grim - | wl-copy" #screenshot copy full screen
+#~ riverctl map -layout 0 normal Super Print spawn "grim $HOME/Pictures/Screenshots/$(date +%Y-%m-%d_%H-%M-%S).png" #screenshot save full screen
+riverctl map -layout 0 normal None Print spawn "grim"
 # keyboard layout
 riverctl keyboard-layout -options "grp:win_space_toggle" us,ru
 # volume
-riverctl map -layout 0 normal None XF86AudioRaiseVolume spawn 'pactl set-sink-volume @DEFAULT_SINK@ +5%' # +5% volume
-riverctl map -layout 0 normal None XF86AudioLowerVolume spawn 'pactl set-sink-volume @DEFAULT_SINK@ -5%' # -5% volume
+riverctl map -repeat -layout 0 normal None XF86AudioRaiseVolume spawn 'pactl set-sink-volume @DEFAULT_SINK@ +5%' # +5% volume
+riverctl map -repeat -layout 0 normal None XF86AudioLowerVolume spawn 'pactl set-sink-volume @DEFAULT_SINK@ -5%' # -5% volume
 riverctl map -layout 0 normal None XF86AudioMute spawn 'pactl set-sink-mute @DEFAULT_SINK@ toggle' #mute
 riverctl map -layout 0 normal Super M spawn 'pactl set-mute @DEFAULT_AUDIO_SOURCE@ toggle' #mute micro
+riverctl map -layout 0 normal None XF86AudioPause spawn 'playerctl pause' #pause
+riverctl map -layout 0 normal None XF86AudioPlay spawn 'playerctl play' #play
+riverctl map -layout 0 normal None XF86AudioNext spawn 'playerctl next' #next
+riverctl map -layout 0 normal None XF86AudioPrev spawn 'playerctl previous' #previous
 # navigation
-riverctl map -layout 0 normal Super+Shift H send-layout-cmd rivertile "main-ratio -0.1"
-riverctl map -layout 0 normal Super+Shift L send-layout-cmd rivertile "main-ratio +0.1"
+riverctl map -repeat -layout 0 normal Super+Shift H send-layout-cmd rivertile "main-ratio -0.02" #change size of window in left
+riverctl map -repeat -layout 0 normal Super+Shift L send-layout-cmd rivertile "main-ratio +0.02" #change size of window in right
 riverctl map -layout 0 normal Super H focus-view left
 riverctl map -layout 0 normal Super j focus-view down
 riverctl map -layout 0 normal Super k focus-view up
@@ -49,33 +49,47 @@ riverctl map -layout 0 normal Super l focus-view right
 riverctl map-pointer normal Super BTN_LEFT move-view
 riverctl map-pointer normal Super BTN_RIGHT resize-view
 
-#########
-# rules #
-#########
+### rules 
 riverctl spawn rivertile
 riverctl output-layout rivertile
 riverctl default-layout rivertile
 riverctl focus-follows-cursor always
+riverctl set-repeat 20 600
+export XDG_CURRENT_DESKTOP=river
+export XDG_SESSION_DESKTOP=river
 
-##############
-# wallpapers #
-##############
+dbus-update-activation-environment --systemd \
+    WAYLAND_DISPLAY \
+    XDG_CURRENT_DESKTOP \
+    XDG_SESSION_DESKTOP \
+    XDG_SESSION_TYPE
+
+systemctl --user import-environment \
+    WAYLAND_DISPLAY \
+    XDG_CURRENT_DESKTOP \
+    XDG_SESSION_DESKTOP \
+
+### wallpapers
+pkill awww-daemon
 awww-daemon &
-awww img /home/timoti/Downloads/wallhaven-3lg6w9_1920x1080.png
+awww img ~/Pictures/Wallpapers/wallhaven-w51qr6_2560x1440.png
 
-##############
-# workspaces #
-##############
+### workspaces 
 for i in $(seq 1 9); do
     tags=$((1 << ($i - 1)))
     riverctl map normal Super $i set-focused-tags $tags
     riverctl map normal Super+Shift $i set-view-tags $tags
 done
 
-################ 
-# window rules #
-################
-riverctl border-width 2
-riverctl border-color-focused 0x374151
-riverctl border-color-unfocused 0x374151
+### window rules 
+riverctl border-width 1
+riverctl border-color-focused 0xe0e0e0
+riverctl border-color-unfocused 0x1a1a1a
 riverctl border-color-urgent 0xff6b6b
+
+### screen share
+pkill xdg-desktop-portal-wlr
+pkill xdg-desktop-portal
+/usr/lib/xdg-desktop-portal-wlr &
+sleep 1
+/usr/lib/xdg-desktop-portal &
