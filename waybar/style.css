@@ -1,0 +1,63 @@
+window#waybar {
+    font-family: "JetBrainsMono Nerd Font", "Font Awesome 6 Free", "Font Awesome 5 Free", sans-serif;
+    font-size: 13px;
+    background: #1a1a1a;
+    border: 1px solid #ebbcba;
+    padding: 3px 0;
+    color: #ffffff;
+    border-radius: 6px;
+}
+
+#tags {
+    font-size: 14px;
+}
+
+#tags button.focused {
+    color: #ffffff;
+    background: #2d2d2d;
+    border-radius: 0px;
+    border-top: 0px solid #ffffff;
+    margin: 2px 4px;
+    padding: 2px 20;
+    min-width: 0;
+}
+
+#tags button {
+    color: #737373;
+    background: transparent;
+    border: none;
+    border-radius: 0;
+    margin: 0px 20px;
+    padding: 2px 0;
+}
+
+#tags button.occupied {
+    color: #e0e0e0;
+}
+
+#tags button.urgent {
+    color: #ffffff;
+    margin: 2px 20px;
+    background: #737373;
+}
+
+#clock {
+    color: #ffffff;
+    font-weight: bold;
+    padding: 5px 0;
+}
+
+#battery,
+#pulseaudio,
+#memory {
+    padding: 0px 12;
+    margin: 1px 1px;
+    color: #ffffff;
+    border-top: 0px solid #e0e0e0;
+    font-size: 12px;
+    border-left: none;
+}
+
+#tray {
+	padding: 0px 12;
+}
